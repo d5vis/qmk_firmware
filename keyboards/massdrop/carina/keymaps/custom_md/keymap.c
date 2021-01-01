@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, \
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, \
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  \
+        MO(1), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  \
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,                   KC_RSFT, \
         KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                                      KC_GRV, KC_MENU, KC_RCTRL, MO(1) \
     ),
@@ -267,7 +267,7 @@ led_instruction_t led_instructions[] = {
     //Examples are below
 
     //All LEDs use the user's selected pattern (this is the factory default)
-     { .flags = LED_FLAG_USE_ROTATE_PATTERN },
+    //  { .flags = LED_FLAG_USE_ROTATE_PATTERN },
 
     //Specific LEDs use the user's selected pattern while all others are off
     // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_ROTATE_PATTERN, .id0 = 0xFFFFFFFF, .id1 = 0xAAAAAAAA, .id2 = 0x55555555, .id3 = 0x11111111 },
@@ -294,6 +294,50 @@ led_instruction_t led_instructions[] = {
     //Edge uses active pattern (id3 119 -  96: 0000 0000 1111 1111 1111 1111 1111 1111 = 0x00FFFFFF)
     // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFFFFFFFF, .id1 = 0xFFFFFFFF, .id2 = 0x007FFFFF, .r = 255 },
     // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_ROTATE_PATTERN , .id2 = 0xFF800000, .id3 = 0x00FFFFFF },
+
+    /*
+    Mapping guide
+
+1111 = F
+1110 = E
+1101 = D
+1100 = C
+1011 = B
+1010 = A
+1001 = 9
+1000 = 8
+0111 = 7
+0110 = 6
+0101 = 5
+0100 = 4
+0011 = 3
+0010 = 2
+0001 = 1
+0000 = 0
+
+01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14
+15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28
+29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+54, 55, 56,   ,   ,   , 57,   ,   ,   , 58, 59, 60, 61
+
+62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72
+89                                      73
+88                                      74
+87                                      75
+86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76
+
+
+id0: 1 - 32
+id1: 33 - 64
+id2: 65 - 89
+
+
+    */
+    // MY CUSTOM RGB
+    { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFFFFC000, .id1 = 0x1FFFFFFF, .r = 0, .g = 255, .b = 162,  },
+    { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id1 = 0xE0000000, .id2 = 0xFFFFFFFF, .r = 85, .g = 0, .b = 255,  },
+    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id2 = 0xFF800000, .id3 = 0x00FFFFFF, .r = 85, .g = 0, .b = 255,  },
 
     //end must be set to 1 to indicate end of instruction set
      { .end = 1 }
