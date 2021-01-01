@@ -1,13 +1,13 @@
 # Carina 60% acrylic Keyboard
 
+The Massdrop Carina 60% Acrylic Keyboard is a 60% mechanical keyboard featuring dual USB-C connectors, an integrated Hi-Speed USB 2.0 hub, and fully customizable RGB backlighting (and underlighting).
 
-The Massdrop  Carina 60% Acrylic Keyboard is a 60% mechanical keyboard featuring dual USB-C connectors, an integrated Hi-Speed USB 2.0 hub, and fully customizable RGB backlighting (and underlighting).
-
-Keyboard Maintainer: [Drop / Massdrop](https://github.com/Massdrop/qmk_firmware)  
+Keyboard Maintainer: [Drop / Massdrop](https://github.com/Massdrop/qmk_firmware)
 
 Make example for this keyboard (after setting up your build environment):
 
     make massdrop/carina:default_md
+    make massdrop/carina:rgb_matrix <-- with reactive rgb
 
 For information on flashing this keyboard, visit the following links:
 
