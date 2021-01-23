@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT(
         KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  \
         L_T_BR,  L_PSD,   L_BRI,   L_PSI,   L_EDG_I, _______, _______, KC_PSCR, KC_SLCK, KC_PAUS, _______,   _______, _______, U_T_AGCR,\
-        L_T_PTD, L_PTP,   L_BRD,   L_PTN,   L_EDG_D, _______, _______, KC_INS,  KC_HOME, KC_PGUP, _______,   _______,          _______, \
+        L_T_PTD, L_PTP,   L_BRD,   L_PTN,   L_EDG_D, _______, _______, KC_INS,  KC_HOME, KC_PGUP, _______,   _______,         _______, \
         _______, L_T_MD,  L_T_ONF, _______, L_EDG_M, MD_BOOT, TG_NKRO, KC_DEL,  KC_END,  KC_PGDN,   KC_UP,                   _______, \
         _______, _______, _______,                   DBG_FAC,                                    KC_LEFT, KC_DOWN, KC_RIGHT,  _______ \
     ),
@@ -269,32 +269,6 @@ led_instruction_t led_instructions[] = {
     //All LEDs use the user's selected pattern (this is the factory default)
     //  { .flags = LED_FLAG_USE_ROTATE_PATTERN },
 
-    //Specific LEDs use the user's selected pattern while all others are off
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_ROTATE_PATTERN, .id0 = 0xFFFFFFFF, .id1 = 0xAAAAAAAA, .id2 = 0x55555555, .id3 = 0x11111111 },
-
-    //Specific LEDs use specified RGB values while all others are off
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFF, .id1 = 0x00FF, .id2 = 0x0000FF00, .id3 = 0xFF000000, .r = 75, .g = 150, .b = 225 },
-
-    //All LEDs use the user's selected pattern
-    //On layer 1, all key LEDs (except the top row which keeps active pattern) are red while all edge LEDs are green
-    //When layer 1 is active, key LEDs use red    (id0  32 -  17: 1111 1111 1111 1111 0000 0000 0000 0000 = 0xFFFF0000) (except top row 16 - 1)
-    //When layer 1 is active, key LEDs use red    (id1  64 -  33: 1111 1111 1111 1111 1111 1111 1111 1111 = 0xFFFFFFFF)
-    //When layer 1 is active, key LEDs use red    (id2  87 -  65: 0000 0000 0111 1111 1111 1111 1111 1111 = 0x007FFFFF)
-    //When layer 1 is active, edge LEDs use green (id2  95 -  88: 1111 1111 1000 0000 0000 0000 0000 0000 = 0xFF800000)
-    //When layer 1 is active, edge LEDs use green (id3 119 -  96: 0000 0000 1111 1111 1111 1111 1111 1111 = 0x00FFFFFF)
-    // { .flags = LED_FLAG_USE_ROTATE_PATTERN },
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_MATCH_LAYER | LED_FLAG_USE_RGB, .id0 = 0xFFFF0000, .id1 = 0xFFFFFFFF, .id2 = 0x007FFFFF, .r = 255, .layer = 1 },
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_MATCH_LAYER | LED_FLAG_USE_RGB, .id2 = 0xFF800000, .id3 = 0x00FFFFFF, .g = 127, .layer = 1 },
-
-    //All key LEDs use red while edge LEDs use the active pattern
-    //All key LEDs use red     (id0  32 -   1: 1111 1111 1111 1111 1111 1111 1111 1111 = 0xFFFFFFFF)
-    //All key LEDs use red     (id1  64 -  33: 1111 1111 1111 1111 1111 1111 1111 1111 = 0xFFFFFFFF)
-    //All key LEDs use red     (id2  87 -  65: 0000 0000 0111 1111 1111 1111 1111 1111 = 0x007FFFFF)
-    //Edge uses active pattern (id2  95 -  88: 1111 1111 1000 0000 0000 0000 0000 0000 = 0xFF800000)
-    //Edge uses active pattern (id3 119 -  96: 0000 0000 1111 1111 1111 1111 1111 1111 = 0x00FFFFFF)
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFFFFFFFF, .id1 = 0xFFFFFFFF, .id2 = 0x007FFFFF, .r = 255 },
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_ROTATE_PATTERN , .id2 = 0xFF800000, .id3 = 0x00FFFFFF },
-
     /*
         Mapping guide
 
@@ -332,9 +306,15 @@ led_instruction_t led_instructions[] = {
         id1: 33 - 64
         id2: 65 - 89
     */
-    { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFFFFC000, .id1 = 0x1FFFFFFF, .r = 0, .g = 255, .b = 162,  },
-    { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id1 = 0xE0000000, .id2 = 0xFFFFFFFF, .r = 85, .g = 0, .b = 255,  },
-    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id2 = 0xFF800000, .id3 = 0x00FFFFFF, .r = 85, .g = 0, .b = 255,  },
+
+    // modifers bottom row
+    // { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFFFFC000, .id1 = 0x1FFFFFFF, .r = 255, .g = 255, .b = 255,  },
+
+    // all top leds
+    { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id0 = 0xFFFFC000, .id1 = 0x1FFFFFFF, .r = 255, .g = 255, .b = 255,  },
+
+    // all bottom leds
+    { .flags = LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .id1 = 0xE0000000, .id2 = 0xFFFFFFFF, .r = 255, .g = 255, .b = 255,  },
 
     //end must be set to 1 to indicate end of instruction set
      { .end = 1 }
