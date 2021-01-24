@@ -1,7 +1,6 @@
 #include QMK_KEYBOARD_H
 
 enum carina_keycodes {
-    OW,
     U_T_AUTO = SAFE_RANGE,
     U_T_AGCR,           //USB Toggle Automatic GCR control
     DBG_TOG,            //DEBUG Toggle On / Off
@@ -29,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, KC_PSCR, KC_SLCK, KC_PAUS, _______,   _______, _______, U_T_AGCR,\
         _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, KC_INS,  KC_HOME, KC_PGUP, _______,   _______,         _______, \
         _______, RGB_TOG,  _______, _______, _______, MD_BOOT, TG_NKRO, KC_DEL,  KC_END,  KC_PGDN,   KC_UP,                   _______, \
-        OW, _______, _______,                   DBG_FAC,                                    KC_LEFT, KC_DOWN, KC_RIGHT,  _______ \
+        _______, _______, _______,                   DBG_FAC,                                    KC_LEFT, KC_DOWN, KC_RIGHT,  _______ \
     ),
     /*
     [X] = LAYOUT(
@@ -40,11 +39,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,                   _______,                            _______, _______, _______,          _______  \
     ),
     */
-};
-
-// Runs just one time when the keyboard initializes.
-void matrix_init_user(void) {
-    rgb_matrix_mode(RGB_MATRIX_CUSTOM_border_reactive);
 };
 
 #define MODS_SHIFT (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
@@ -100,37 +94,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case RGB_TOG:
-            if (record->event.pressed) {
-              switch (rgb_matrix_get_flags()) {
-                case LED_FLAG_ALL: {
-                    rgb_matrix_set_flags(LED_FLAG_KEYLIGHT);
-                    rgb_matrix_set_color_all(0, 0, 0);
-                  }
-                  break;
-                case LED_FLAG_KEYLIGHT: {
-                    rgb_matrix_set_flags(LED_FLAG_UNDERGLOW);
-                    rgb_matrix_set_color_all(0, 0, 0);
-                  }
-                  break;
-                case LED_FLAG_UNDERGLOW: {
-                    rgb_matrix_set_flags(LED_FLAG_NONE);
-                    rgb_matrix_disable_noeeprom();
-                  }
-                  break;
-                default: {
-                    rgb_matrix_set_flags(LED_FLAG_ALL);
-                    rgb_matrix_enable_noeeprom();
-                  }
-                  break;
-              }
-            }
-            return false;
-
-        case OW:
-            if(record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_CUSTOM_border_reactive);
-            }
+        // case RGB_TOG:
+        //     if (record->event.pressed) {
+        //       switch (rgb_matrix_get_flags()) {
+        //         case LED_FLAG_ALL: {
+        //             rgb_matrix_set_flags(LED_FLAG_KEYLIGHT);
+        //             rgb_matrix_set_color_all(0, 0, 0);
+        //           }
+        //           break;
+        //         case LED_FLAG_KEYLIGHT: {
+        //             rgb_matrix_set_flags(LED_FLAG_UNDERGLOW);
+        //             rgb_matrix_set_color_all(0, 0, 0);
+        //           }
+        //           break;
+        //         case LED_FLAG_UNDERGLOW: {
+        //             rgb_matrix_set_flags(LED_FLAG_NONE);
+        //             rgb_matrix_disable_noeeprom();
+        //           }
+        //           break;
+        //         default: {
+        //             rgb_matrix_set_flags(LED_FLAG_ALL);
+        //             rgb_matrix_enable_noeeprom();
+        //           }
+        //           break;
+        //       }
+        //     }
+        //     return false;
         default:
             return true; //Process all other keycodes normally
     }
