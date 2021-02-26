@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-    rgb_matrix_mode(RGB_MATRIX_CUSTOM_border_reactive);
+    rgb_matrix_mode(RGB_MATRIX_CUSTOM_purple_border_reactive);
 };
 
 #define MODS_SHIFT (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
@@ -129,7 +129,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case OW:
             if(record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_CUSTOM_border_reactive);
+                rgb_matrix_mode(RGB_MATRIX_CUSTOM_purple_border_reactive);
             }
         default:
             return true; //Process all other keycodes normally
