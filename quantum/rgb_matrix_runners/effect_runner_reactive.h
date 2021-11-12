@@ -8,7 +8,7 @@ bool effect_runner_reactive(effect_params_t* params, reactive_f effect_func) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
     uint16_t max_tick = 65535 / rgb_matrix_config.speed;
-    for (uint8_t i = led_min; i < led_max; i++) {
+    for (uint8_t i = 0; i < 87; i++) {
         RGB_MATRIX_TEST_LED_FLAGS();
         uint16_t tick = max_tick;
         // Reverse search to find most recent key hit
